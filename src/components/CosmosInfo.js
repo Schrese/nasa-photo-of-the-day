@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import CosmosStructure from './CosmosStructure.js';
-import { tsPropertySignature } from '@babel/types';
+
 
 const CosmosInfo = () => {
     const [picture, setPicture] = useState({});
+    // const [newDate, setNewDate]
 
     useEffect(() => {
         axios.get(`https://api.nasa.gov/planetary/apod?api_key=JwcanU4s2iCXXkqt3sxgIzNVX1FpNLrlsdEAc92h`)
@@ -15,13 +16,19 @@ const CosmosInfo = () => {
         .catch(error => {
             console.log('what did you do now?', error);
         })
-    }, {})
+    }, [])
 
     return (
         // <div>Hello</div>
         <div className = 'cosmos'>
-            <img src = 'response.data.url' alt = 'starburst'/>
-            
+            {/* <img src = 'response.data.url' alt = 'starburst'/> */}
+            {/* <button onClick = {() => setNewDate('date' -1)}>-</button> */}
+            <h1>The Image of the Day is: {picture.title}</h1>
+            <img className = 'image' src = {picture.url} alt = 'photo of the day'/>
+            <h2>{picture.date}</h2>
+            <h4>{picture.explanation}</h4>
+
+            {/* <CosmosStructure key={picture.url}/> */}
         
         </div>
     )
